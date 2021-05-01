@@ -1,0 +1,41 @@
+.masonry-card {
+  position: relative;
+  background: #000;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: transform 0.5s; /* Animation */
+  transition-timing-function: ease-in;
+}
+
+.masonry-card img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.masonry-card:hover img {
+  transform: scale(1.2);
+}
+
+.masonry-card:hover {
+  /* box-shadow: 0 0 10px 0 rgb(0 0 0 / 30%); */
+}
+
+.deactive-check {
+  position: absolute;
+  color: #fff;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 1;
+}
+
+.active-check {
+  position: absolute;
+  color: #55ff06;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 2;
+}
