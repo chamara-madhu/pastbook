@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import {
-  NotificationContainer,
-  NotificationManager,
-} from "react-notifications";
-import "react-notifications/lib/notifications.css";
 import RLDD from "react-list-drag-and-drop/lib/RLDD";
 
 import {
@@ -49,12 +44,8 @@ function ChangeOrderAndConfirmComp(props) {
       selPhotos,
       (data) => {
         setLoading(false);
-        NotificationManager.success("Saved Successfully!", "Success");
-
-        setTimeout(() => {
-          sessionStorage.removeItem("selected_photos");
-          props.history.push("/");
-        }, 500);
+        sessionStorage.removeItem("selected_photos");
+        props.history.push("/");
       },
       (error) => {
         setLoading(false);
@@ -71,7 +62,7 @@ function ChangeOrderAndConfirmComp(props) {
       selPhotos,
       (data) => {
         setLoading(false);
-        NotificationManager.success("Saved Successfully!", "Success");
+        sessionStorage.removeItem("selected_photos");
         props.history.push("/");
       },
       (error) => {
@@ -81,65 +72,59 @@ function ChangeOrderAndConfirmComp(props) {
   };
 
   return (
-    <>
-      <div className="container-cus px-0">
-        <div className="row m-0">
-          <div className="col p-0 con-min-height">
-            {!preLoading ? (
-              <>
-                <div className="sticky-header">
-                  <h3 className="main-heading">Arrange Your Photos</h3>
-                  <p className="text-center">
-                    Drag and drop to arrange your photos and save.
-                  </p>
-                  <button
-                    type="button"
-                    className="btn back-btn"
-                    onClick={() => props.history.push("/select-best-nine")}
-                  >
-                    <i
-                      className="fas fa-angle-left"
-                      style={{ fontSize: 14 }}
-                    ></i>{" "}
-                    Back
-                  </button>
-                  <button
-                    type="button"
-                    className="btn custom-btn-active"
-                    onClick={id ? handleUpdate : handleSave}
-                    disabled={loading ? true : false}
-                  >
-                    {loading ? (
-                      <>
-                        <span
-                          class="spinner-border spinner-border-sm"
-                          role="status"
-                          aria-hidden="true"
-                        ></span>
-                        <span class="sr-only">Loading...</span>
-                      </>
-                    ) : (
-                      "Save"
-                    )}
-                  </button>
-                </div>
-                <div className="grid-order">
-                  <RLDD
-                    cssClasses="example"
-                    items={selPhotos}
-                    itemRenderer={CardOrder}
-                    onChange={handleRLDDChange}
-                  />
-                </div>
-              </>
-            ) : (
-              <Preloading />
-            )}
-          </div>
+    <div className="container-cus px-0">
+      <div className="row m-0">
+        <div className="col p-0 con-min-height">
+          {!preLoading ? (
+            <>
+              <div className="sticky-header">
+                <h3 className="main-heading">Arrange Your Photos</h3>
+                <p className="text-center">
+                  Drag and drop to arrange your photos and save.
+                </p>
+                <button
+                  type="button"
+                  className="btn back-btn"
+                  onClick={() => props.history.push("/select-best-nine")}
+                >
+                  <i className="fas fa-angle-left" style={{ fontSize: 14 }}></i>{" "}
+                  Back
+                </button>
+                <button
+                  type="button"
+                  className="btn custom-btn-active"
+                  onClick={id ? handleUpdate : handleSave}
+                  disabled={loading ? true : false}
+                >
+                  {loading ? (
+                    <>
+                      <span
+                        class="spinner-border spinner-border-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      <span class="sr-only">Loading...</span>
+                    </>
+                  ) : (
+                    "Save"
+                  )}
+                </button>
+              </div>
+              <div className="grid-order">
+                <RLDD
+                  cssClasses="example"
+                  items={selPhotos}
+                  itemRenderer={CardOrder}
+                  onChange={handleRLDDChange}
+                />
+              </div>
+            </>
+          ) : (
+            <Preloading />
+          )}
         </div>
       </div>
-      <NotificationContainer />
-    </>
+    </div>
   );
 }
 

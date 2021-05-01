@@ -21,6 +21,7 @@ function DashboardComp(props) {
   const [preLoading, setPreLoading] = useState(true);
 
   useEffect(() => {
+    sessionStorage.removeItem("selected_photos");
     fetchSelectedPhotos(
       (data) => {
         setUpdatedOn(data.data[0].createdAt);

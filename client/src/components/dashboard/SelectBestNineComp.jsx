@@ -95,7 +95,7 @@ function SelectBestNineComp(props) {
             <>
               <div className="sticky-header">
                 <h3 className="main-heading">Select Your Best 9 photos</h3>
-                <p className="text-center">Photos : {isSelected.length}</p>
+                <p className="photo-count">Photos : {isSelected.length}</p>
                 <button
                   type="button"
                   className="btn back-btn"
