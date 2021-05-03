@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// get all photos
 export const fetchAllPhotos = (onSuccess, onError) => {
   axios
     .get(
@@ -13,9 +14,10 @@ export const fetchAllPhotos = (onSuccess, onError) => {
     });
 };
 
+// save photos at first time
 export const savePhotos = (data, onSuccess, onError) => {
   axios
-    .post(`/api/photo`, data)
+    .post(`http://localhost:5000/api/photo`, data)
     .then((response) => {
       onSuccess(response);
     })
@@ -24,9 +26,10 @@ export const savePhotos = (data, onSuccess, onError) => {
     });
 };
 
+// update photos
 export const updatePhotos = (id, data, onSuccess, onError) => {
   axios
-    .put(`/api/photo/${id}`, data)
+    .put(`http://localhost:5000/api/photo/${id}`, data)
     .then((response) => {
       onSuccess(response);
     })
@@ -35,9 +38,10 @@ export const updatePhotos = (id, data, onSuccess, onError) => {
     });
 };
 
+// get saved photos from DB
 export const fetchSelectedPhotos = (onSuccess, onError) => {
   axios
-    .get("/api/photo")
+    .get("http://localhost:5000/api/photo")
     .then((response) => {
       onSuccess(response);
     })
@@ -46,9 +50,10 @@ export const fetchSelectedPhotos = (onSuccess, onError) => {
     });
 };
 
+// delete all photos
 export const deleteStoredPhotos = (onSuccess, onError) => {
   axios
-    .delete("/api/photo")
+    .delete("http://localhost:5000/api/photo")
     .then((response) => {
       onSuccess(response);
     })

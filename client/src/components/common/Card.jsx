@@ -24,7 +24,6 @@ function Card(props) {
 
       <PhotoProvider>
         <PhotoConsumer key={props.data.id} src={props.data.picture}>
-          {/* <img src={thumbImage} width="100"  /> */}
           <img
             src={props.data.picture}
             alt="photo"

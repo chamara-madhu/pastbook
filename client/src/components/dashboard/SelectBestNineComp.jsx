@@ -16,35 +16,40 @@ function SelectBestNineComp(props) {
   const [preLoading, setPreLoading] = useState(true);
 
   useEffect(() => {
+    // get all photos
     fetchAllPhotos(
       (data) => {
+        // adding isSelected object key and value (Eg. isSelected: false)
         const arr = addIsSelected(data.data.entries);
         setPhotos(arr);
+        // store all photos in session storage
         sessionStorage.setItem("all_photos", JSON.stringify(arr));
 
-        fetchSelectedPhotos(
-          (data) => {
-            const selectedPhotos = data.data[0].photos;
-            let arragedArr = [];
+        let arragedArr = [];
 
-            for (let i = 0; i < selectedPhotos.length; i++) {
-              arragedArr = arr.filter((el) => {
-                if (el.id === selectedPhotos[i].id) {
-                  el["isSelected"] = true;
-                  return el;
-                } else {
-                  return el;
-                }
-              });
+        // check if there selected photos in session storage
+        if (sessionStorage.getItem("selected_photos")) {
+          const selectedStoredPhotos = JSON.parse(
+            sessionStorage.getItem("selected_photos")
+          );
+          arragedArr = gettingSelectedPhotos(arr, selectedStoredPhotos);
+
+          setPhotos(arragedArr);
+          setPreLoading(false);
+        } else {
+          fetchSelectedPhotos(
+            (data) => {
+              const selectedPhotos = data.data[0].photos;
+              arragedArr = gettingSelectedPhotos(arr, selectedPhotos);
+
+              setPhotos(arragedArr);
+              setPreLoading(false);
+            },
+            (error) => {
+              setPreLoading(false);
             }
-
-            setPhotos(arragedArr);
-            setPreLoading(false);
-          },
-          (error) => {
-            setPreLoading(false);
-          }
-        );
+          );
+        }
       },
       (error) => {
         setPreLoading(false);
@@ -52,6 +57,7 @@ function SelectBestNineComp(props) {
     );
   }, []);
 
+  // setting isSelected as default (Eg. isSelected: false)
   const addIsSelected = (data) => {
     let photoArr = [];
 
@@ -64,6 +70,22 @@ function SelectBestNineComp(props) {
     return photoArr;
   };
 
+  // setting isSelected photos (Eg. isSelected: true)
+  const gettingSelectedPhotos = (arr, selectedPhotos) => {
+    for (let i = 0; i < selectedPhotos.length; i++) {
+      arr.filter((el) => {
+        if (el.id === selectedPhotos[i].id) {
+          el["isSelected"] = true;
+          return el;
+        } else {
+          return el;
+        }
+      });
+    }
+    return arr;
+  };
+
+  // function to handle selection and de-selection
   const handleSelections = (id) => {
     const filteredPhotos = photos.filter((el) => {
       if (el.id === id) {
@@ -80,8 +102,10 @@ function SelectBestNineComp(props) {
     setPhotos(filteredPhotos);
   };
 
+  // get all selected photos
   const isSelected = photos.filter((el) => el.isSelected === true);
 
+  // continue
   const handleContine = () => {
     sessionStorage.setItem("selected_photos", JSON.stringify(isSelected));
     props.history.push("/change-order");

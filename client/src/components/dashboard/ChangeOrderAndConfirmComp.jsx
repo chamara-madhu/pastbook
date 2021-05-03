@@ -21,6 +21,7 @@ function ChangeOrderAndConfirmComp(props) {
   useEffect(() => {
     setSelPhotos(JSON.parse(sessionStorage.getItem("selected_photos")));
 
+    // get all saved photos from DB
     fetchSelectedPhotos(
       (data) => {
         setId(data.data[0]._id);
@@ -32,10 +33,12 @@ function ChangeOrderAndConfirmComp(props) {
     );
   }, []);
 
+  // handle drag and drop
   const handleRLDDChange = (reorderedItems) => {
     setSelPhotos(reorderedItems);
   };
 
+  // handle save photos in the DB
   const handleSave = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -53,6 +56,7 @@ function ChangeOrderAndConfirmComp(props) {
     );
   };
 
+  // handle update photos in the DB
   const handleUpdate = (e) => {
     e.preventDefault();
     setLoading(true);

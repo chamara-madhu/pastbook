@@ -9,11 +9,6 @@ function Navbar() {
       <Link to="/" className="text-white" style={{ textDecoration: "none" }}>
         <h4>Pastbook</h4>
       </Link>
-      {/* <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
-          <span className="nav-link text-white">Logout</span>
-        </li>
-      </ul> */}
     </nav>
   );
 }

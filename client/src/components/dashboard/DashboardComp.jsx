@@ -21,7 +21,10 @@ function DashboardComp(props) {
   const [preLoading, setPreLoading] = useState(true);
 
   useEffect(() => {
+    // remove stored selected_photos in session storage
     sessionStorage.removeItem("selected_photos");
+
+    // get all saved photos from DB
     fetchSelectedPhotos(
       (data) => {
         setUpdatedOn(data.data[0].createdAt);
@@ -34,11 +37,13 @@ function DashboardComp(props) {
     );
   }, []);
 
+  // handle delete all photos from database
   const handleDelete = () => {
     setLoading(true);
     deleteStoredPhotos(
       (data) => {
         setPhotos([]);
+        setUpdatedOn("");
         setLoading(false);
         NotificationManager.success("Removed!", "Success");
         document.getElementById("confirmModalClose").click();

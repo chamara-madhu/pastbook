@@ -2,24 +2,3 @@
   background: #323d51;
   height: 65px;
 }
-
-.client-nav-bar .nav-link {
-  display: inline;
-  color: #fff;
-  margin-left: 15px;
-  font-size: 14px;
-  font-weight: 300;
-}
-
-.client-nav-bar .nav-link:hover {
-  color: #cca326;
-}
-
-.client-nav-bar .user-icon {
-  font-size: 14px;
-  border: 1.5px solid #cca326;
-  padding: 8px 9.25px;
-  border-radius: 50%;
-  cursor: pointer;
-  background: #cca326;
-}

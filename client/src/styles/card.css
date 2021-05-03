@@ -16,10 +16,6 @@
   transform: scale(1.2);
 }
 
-.masonry-card:hover {
-  /* box-shadow: 0 0 10px 0 rgb(0 0 0 / 30%); */
-}
-
 .deactive-check {
   position: absolute;
   color: #fff;
