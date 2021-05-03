@@ -17,7 +17,7 @@ export const fetchAllPhotos = (onSuccess, onError) => {
 // save photos at first time
 export const savePhotos = (data, onSuccess, onError) => {
   axios
-    .post(`http://localhost:5000/api/photo`, data)
+    .post(`/api/photo`, data)
     .then((response) => {
       onSuccess(response);
     })
@@ -29,7 +29,7 @@ export const savePhotos = (data, onSuccess, onError) => {
 // update photos
 export const updatePhotos = (id, data, onSuccess, onError) => {
   axios
-    .put(`http://localhost:5000/api/photo/${id}`, data)
+    .put(`/api/photo/${id}`, data)
     .then((response) => {
       onSuccess(response);
     })
@@ -41,7 +41,7 @@ export const updatePhotos = (id, data, onSuccess, onError) => {
 // get saved photos from DB
 export const fetchSelectedPhotos = (onSuccess, onError) => {
   axios
-    .get("http://localhost:5000/api/photo")
+    .get("/api/photo")
     .then((response) => {
       onSuccess(response);
     })
@@ -53,7 +53,7 @@ export const fetchSelectedPhotos = (onSuccess, onError) => {
 // delete all photos
 export const deleteStoredPhotos = (onSuccess, onError) => {
   axios
-    .delete("http://localhost:5000/api/photo")
+    .delete("/api/photo")
     .then((response) => {
       onSuccess(response);
     })
