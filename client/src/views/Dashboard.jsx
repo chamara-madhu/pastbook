@@ -1,12 +1,12 @@
 import React from "react";
 
 import DashboardLayout from "../components/layouts/DashboardLayout";
-import DashboardComp from "../components/dashboard/DashboardComp";
+import NinePhotosComp from "../components/dashboard/nine-photos/NinePhotosComp";
 
 function Dashboard() {
   return (
     <DashboardLayout>
-      <DashboardComp />
+      <NinePhotosComp />
     </DashboardLayout>
   );
 }

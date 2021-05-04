@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import moment from "moment";
 import {
   NotificationContainer,
@@ -7,17 +6,20 @@ import {
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 
-import { fetchSelectedPhotos, deleteStoredPhotos } from "../../api/photosAPI";
-import Card from "../common/card/Card";
-import ConfirmModal from "../modals/ConfirmModal";
-import Preloading from "../common/Preloading";
+import {
+  fetchSelectedPhotos,
+  deleteStoredPhotos,
+} from "../../../api/photosAPI";
+import Card from "../../common/card/Card";
+import ConfirmModal from "../../modals/ConfirmModal";
+import Preloading from "../../common/Preloading";
+import SelectEditDeleteBtns from "./btns/SelectEditDeleteBtns";
 
-function DashboardComp(props) {
+function NinePhotosComp(props) {
   const [photos, setPhotos] = useState([]);
   const [updatedOn, setUpdatedOn] = useState("");
   const [loading, setLoading] = useState(false);
   const [preLoading, setPreLoading] = useState(true);
-  const history = useHistory();
 
   useEffect(() => {
     // remove stored selected_photos in session storage
@@ -26,6 +28,10 @@ function DashboardComp(props) {
     // get all saved photos from DB
     fetchSelectedPhotos(
       (data) => {
+        sessionStorage.setItem(
+          "saved_photos",
+          JSON.stringify(data.data[0].photos)
+        );
         setUpdatedOn(data.data[0].createdAt);
         setPhotos(data.data[0].photos);
         setPreLoading(false);
@@ -62,7 +68,7 @@ function DashboardComp(props) {
               <>
                 <div className="sticky-header">
                   <h3 className="main-heading">Your Best 9 Photos</h3>
-                  {updatedOn ? (
+                  {photos.length > 0 ? (
                     <p className="text-center" style={{ fontSize: 13 }}>
                       Last update :{" "}
                       {moment(updatedOn).format("MMM Do YYYY hh:mm a")}
@@ -73,33 +79,7 @@ function DashboardComp(props) {
                     </p>
                   )}
 
-                  {photos.length > 0 ? (
-                    <>
-                      <button
-                        type="button"
-                        className="btn btn-outline-secondary mr-1"
-                        onClick={() => history.push("/select-best-nine")}
-                      >
-                        <i className="fas fa-pencil-alt"></i>
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-outline-danger ml-1"
-                        data-toggle="modal"
-                        data-target="#confirmModal"
-                      >
-                        <i className="fas fa-trash-alt"></i>
-                      </button>
-                    </>
-                  ) : (
-                    <button
-                      type="button"
-                      className="btn select-now-btn"
-                      onClick={() => history.push("/select-best-nine")}
-                    >
-                      <i className="fas fa-image"></i> &nbsp; Select Now
-                    </button>
-                  )}
+                  <SelectEditDeleteBtns photosLen={photos.length} />
                 </div>
 
                 <div className="grid">
@@ -120,4 +100,4 @@ function DashboardComp(props) {
   );
 }
 
-export default DashboardComp;
+export default NinePhotosComp;
