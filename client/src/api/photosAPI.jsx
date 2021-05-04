@@ -1,11 +1,11 @@
 import axios from "axios";
 
+import { sampleAPI } from "../resources/sampleAPI";
+
 // get all photos
 export const fetchAllPhotos = (onSuccess, onError) => {
   axios
-    .get(
-      "https://dev-pb-apps.s3-eu-west-1.amazonaws.com/collection/CHhASmTpKjaHyAsSaauThRqMMjWanYkQ.json"
-    )
+    .get(sampleAPI)
     .then((response) => {
       onSuccess(response);
     })

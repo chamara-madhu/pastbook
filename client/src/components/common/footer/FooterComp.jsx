@@ -1,7 +1,5 @@
 import React from "react";
 
-import "../../styles/footer.css";
-
 function Footer() {
   return (
     <div className="row m-0 footer-sec">

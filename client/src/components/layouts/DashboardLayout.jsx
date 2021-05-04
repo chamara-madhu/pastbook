@@ -1,13 +1,13 @@
 import React from "react";
-import Navbar from "../common/Navbar";
-import Footer from "../common/Footer";
+import NavbarComp from "../common/navbar/NavbarComp";
+import FooterComp from "../common/footer/FooterComp";
 
 function DashboardLayout(props) {
   return (
     <div className="container-fluid p-0">
-      <Navbar />
+      <NavbarComp />
       {props.children}
-      <Footer />
+      <FooterComp />
     </div>
   );
 }

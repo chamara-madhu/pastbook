@@ -7,10 +7,9 @@ import {
   savePhotos,
   updatePhotos,
 } from "../../api/photosAPI";
-import CardOrder from "../common/CardOrder";
+import CardOrder from "../common/card/CardOrder";
 
 import Preloading from "../common/Preloading";
-import "../../styles/masona.css";
 
 function ChangeOrderAndConfirmComp(props) {
   const [id, setId] = useState("");
@@ -103,11 +102,11 @@ function ChangeOrderAndConfirmComp(props) {
                   {loading ? (
                     <>
                       <span
-                        class="spinner-border spinner-border-sm"
+                        className="spinner-border spinner-border-sm"
                         role="status"
                         aria-hidden="true"
                       ></span>
-                      <span class="sr-only">Loading...</span>
+                      <span className="sr-only">Loading...</span>
                     </>
                   ) : (
                     "Save"

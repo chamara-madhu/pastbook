@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./views/Dashboard";
 import SelectBestNine from "./views/SelectBestNine";
 import ChangeOrderAndConfirm from "./views/ChangeOrderAndConfirm";
-import "./styles/main.css";
+
+import "./sass/styles.css";
 
 function App() {
   return (

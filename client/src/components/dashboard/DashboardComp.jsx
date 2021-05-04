@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import moment from "moment";
 import {
   NotificationContainer,
@@ -8,17 +8,16 @@ import {
 import "react-notifications/lib/notifications.css";
 
 import { fetchSelectedPhotos, deleteStoredPhotos } from "../../api/photosAPI";
-import Card from "../common/Card";
+import Card from "../common/card/Card";
 import ConfirmModal from "../modals/ConfirmModal";
 import Preloading from "../common/Preloading";
-
-import "../../styles/masona.css";
 
 function DashboardComp(props) {
   const [photos, setPhotos] = useState([]);
   const [updatedOn, setUpdatedOn] = useState("");
   const [loading, setLoading] = useState(false);
   const [preLoading, setPreLoading] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     // remove stored selected_photos in session storage
@@ -79,7 +78,7 @@ function DashboardComp(props) {
                       <button
                         type="button"
                         className="btn btn-outline-secondary mr-1"
-                        onClick={() => props.history.push("/select-best-nine")}
+                        onClick={() => history.push("/select-best-nine")}
                       >
                         <i className="fas fa-pencil-alt"></i>
                       </button>
@@ -96,7 +95,7 @@ function DashboardComp(props) {
                     <button
                       type="button"
                       className="btn select-now-btn"
-                      onClick={() => props.history.push("/select-best-nine")}
+                      onClick={() => history.push("/select-best-nine")}
                     >
                       <i className="fas fa-image"></i> &nbsp; Select Now
                     </button>
@@ -121,4 +120,4 @@ function DashboardComp(props) {
   );
 }
 
-export default withRouter(DashboardComp);
+export default DashboardComp;

@@ -1,8 +1,3 @@
-:root {
-  --prColor: #536687;
-  --prColorDark: #323d51;
-}
-
 .container-cus {
   max-width: 1090px;
   margin: auto;
@@ -12,37 +7,41 @@
 
 .custom-btn-active {
   display: block;
-  background: var(--prColor);
-  color: #fff;
+  background: $pr-color;
+  color: $light-color;
   width: 150px;
   margin-left: auto;
+  &:hover {
+    background: $pr-color-dark;
+    color: $light-color;
+  }
 }
 
 .custom-btn-disabled {
   display: block;
-  background: #ccc !important;
-  color: #797979;
+  background: $dis-btn-color !important;
+  color: $dis-btn-color-dark;
   width: 150px;
   margin-left: auto;
-}
 
-.custom-btn-disabled:hover {
-  color: #797979;
+  &:hover {
+    color: $dis-btn-color-dark;
+  }
 }
 
 .back-btn {
   display: block;
-  background: #fff !important;
-  color: #797979;
+  background: $light-color !important;
+  color: $dis-btn-color-dark;
   width: 70px;
   margin-right: auto;
   position: absolute;
   text-align: left;
   padding-left: 0;
-}
 
-.back-btn:focus {
-  box-shadow: none;
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 .main-heading {
@@ -59,7 +58,7 @@
 .sticky-header {
   position: sticky;
   top: 63px;
-  background: #fff;
+  background: $light-color;
   z-index: 4;
   padding: 20px 15px;
   text-align: center;
@@ -78,24 +77,23 @@
 
 .select-now-btn {
   display: block;
-  background: var(--prColor);
-  color: #fff;
+  background: $pr-color;
+  color: $light-color;
   width: 200px;
   padding: 10px 15px;
   margin: auto;
   margin-top: 50px;
-}
 
-.custom-btn-active:hover,
-.select-now-btn:hover {
-  background: #303f58;
-  color: #fff;
+  &:hover {
+    background: $pr-color-dark;
+    color: $light-color;
+  }
 }
 
 /* modals */
 .modal-header {
   background: #323d51;
-  color: #fff;
+  color: $light-color;
 }
 
 /* notification */
@@ -105,5 +103,10 @@
 }
 
 .notification-success {
-  background-color: #35c835 !important;
+  background-color: $success-color !important;
+}
+
+// PhotoView-PhotoSlider
+.PhotoView-PhotoSlider__Counter {
+  visibility: hidden;
 }

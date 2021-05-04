@@ -1,24 +1,23 @@
 .masonry-card {
   position: relative;
-  background: #000;
   border-radius: 5px;
   overflow: hidden;
   transition: transform 0.5s; /* Animation */
   transition-timing-function: ease-in;
-}
 
-.masonry-card img {
-  width: 100%;
-  border-radius: 5px;
-}
+  img {
+    width: 100%;
+    border-radius: 5px;
+  }
 
-.masonry-card:hover img {
-  transform: scale(1.2);
+  &:hover img {
+    transform: scale(1.2);
+  }
 }
 
 .deactive-check {
   position: absolute;
-  color: #fff;
+  color: $light-color;
   top: 8px;
   right: 8px;
   cursor: pointer;
@@ -28,7 +27,7 @@
 
 .active-check {
   position: absolute;
-  color: #55ff06;
+  color: $card-select-color;
   top: 8px;
   right: 8px;
   cursor: pointer;

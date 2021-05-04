@@ -1,7 +1,7 @@
 import React from "react";
 
 import DashboardLayout from "../components/layouts/DashboardLayout";
-import SelectBestNineComp from "../components/dashboard/SelectBestNineComp";
+import SelectBestNineComp from "../components/dashboard/selection/SelectBestNineComp";
 
 function SelectBestNine() {
   return (

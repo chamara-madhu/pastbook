@@ -1,10 +1,7 @@
 import React from "react";
-import moment from "moment";
 
 import { PhotoProvider, PhotoConsumer } from "react-photo-view";
 import "react-photo-view/dist/index.css";
-
-import "../../styles/card.css";
 
 function Card(props) {
   return (
@@ -26,7 +23,7 @@ function Card(props) {
         <PhotoConsumer key={props.data.id} src={props.data.picture}>
           <img
             src={props.data.picture}
-            alt="photo"
+            alt={`p${props.data.id}`}
             width="200"
             style={{ cursor: "zoom-in" }}
           />

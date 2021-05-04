@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-import { fetchSelectedPhotos, fetchAllPhotos } from "../../api/photosAPI";
-import Card from "../common/Card";
-import Preloading from "../common/Preloading";
-
-import "../../styles/masona.css";
+import { fetchSelectedPhotos, fetchAllPhotos } from "../../../api/photosAPI";
+import Card from "../../common/card/Card";
+import Preloading from "../../common/Preloading";
+import ContinueBtn from "./continue-btn/ContinueBtn";
 
 function SelectBestNineComp(props) {
   const [photos, setPhotos] = useState(
@@ -14,6 +13,7 @@ function SelectBestNineComp(props) {
       : []
   );
   const [preLoading, setPreLoading] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     // get all photos
@@ -61,27 +61,28 @@ function SelectBestNineComp(props) {
   const addIsSelected = (data) => {
     let photoArr = [];
 
-    for (let i = 0; i < data.length; i++) {
-      const obj = data[i];
+    data.forEach((el) => {
+      const obj = el;
       obj["isSelected"] = false;
 
-      photoArr.push(obj);
-    }
+      photoArr = [...photoArr, obj];
+    });
     return photoArr;
   };
 
   // setting isSelected photos (Eg. isSelected: true)
   const gettingSelectedPhotos = (arr, selectedPhotos) => {
-    for (let i = 0; i < selectedPhotos.length; i++) {
+    selectedPhotos.forEach((sel) => {
       arr.filter((el) => {
-        if (el.id === selectedPhotos[i].id) {
+        if (el.id === sel.id) {
           el["isSelected"] = true;
           return el;
         } else {
           return el;
         }
       });
-    }
+    });
+
     return arr;
   };
 
@@ -105,10 +106,14 @@ function SelectBestNineComp(props) {
   // get all selected photos
   const isSelected = photos.filter((el) => el.isSelected === true);
 
+  if (isSelected.length > 0) {
+    sessionStorage.setItem("selected_photos", JSON.stringify(isSelected));
+  }
+
   // continue
   const handleContine = () => {
     sessionStorage.setItem("selected_photos", JSON.stringify(isSelected));
-    props.history.push("/change-order");
+    history.push("/change-order");
   };
 
   return (
@@ -118,12 +123,16 @@ function SelectBestNineComp(props) {
           {!preLoading ? (
             <>
               <div className="sticky-header">
-                <h3 className="main-heading">Select Your Best 9 photos</h3>
-                <p className="photo-count">Photos : {isSelected.length}</p>
+                <h3 className="main-heading" data-testid="photo-counter">
+                  Select Your Best 9 photos
+                </h3>
+                <p className="photo-count" data-testid="photos-count">
+                  Photos : {isSelected.length}
+                </p>
                 <button
                   type="button"
                   className="btn back-btn"
-                  onClick={() => props.history.push("/")}
+                  onClick={() => history.push("/")}
                 >
                   <i className="fas fa-angle-left" style={{ fontSize: 14 }}></i>{" "}
                   Back
@@ -154,19 +163,4 @@ function SelectBestNineComp(props) {
   );
 }
 
-const ContinueBtn = (props) => {
-  return (
-    <button
-      type="button"
-      className={
-        props.len === 9 ? "btn custom-btn-active" : "btn custom-btn-disabled"
-      }
-      disabled={props.len === 9 ? false : true}
-      onClick={props.handleContine}
-    >
-      Continue <i className="fas fa-angle-right" style={{ fontSize: 14 }}></i>
-    </button>
-  );
-};
-
-export default withRouter(SelectBestNineComp);
+export default SelectBestNineComp;
